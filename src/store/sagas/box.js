@@ -1,6 +1,10 @@
+import { createAction } from '@reduxjs/toolkit';
 import { put, takeLatest } from 'redux-saga/effects';
 
-import { GET_RESULT, SET_RESULT } from '../contants';
+import { GET_RESULT } from '../contants';
+import { setResult } from '../slices/boxSlice';
+
+export const getResult = createAction(GET_RESULT);
 
 function* handleRequest() {
   try {
@@ -10,11 +14,11 @@ function* handleRequest() {
         resolve('Hello World');
       }, 1000);
     });
-    yield put({ type: SET_RESULT, payload: res });
+    yield put(setResult(res));
   } catch (error) {
-    yield put({ type: SET_RESULT, payload: null });
+    yield put(setResult(null));
   }
 }
 export function* watchHandleRequest() {
-  yield takeLatest(GET_RESULT, handleRequest);
+  yield takeLatest(getResult.type, handleRequest);
 }
