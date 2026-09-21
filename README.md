@@ -7,9 +7,19 @@
 追求简洁，易用，减少各种心智负担，可以作为一个基础的模板，在这个上面可以搭建业务项目
 
 # 环境变量
-VITE_USE_HASH_ROUTE：是否使用哈希路由
+- `VITE_USE_HASH_ROUTE`：是否使用哈希路由
+- `VITE_OUT_DIR`：构建输出目录
+- `VITE_API_BASE_URL`：接口前缀
 
-# 常用的npm包
+本地默认读取 `.env` / `.env.development`，构建分别读取 `.env.beta` / `.env.prod`。可参考 `.env.example`。
+
+# 安装
+```bash
+pnpm i
+pnpm start
+```
+
+# 常用依赖
 - [React](https://react.dev/)
 - [React Router](https://reactrouter.com/)
 - [Redux](https://redux.js.org/)

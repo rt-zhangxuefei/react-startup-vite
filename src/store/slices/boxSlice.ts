@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+export interface BoxState {
+  result: string | null;
+}
+
+const initialState: BoxState = {
   result: null
 };
 
@@ -8,7 +12,7 @@ const boxSlice = createSlice({
   name: 'box',
   initialState,
   reducers: {
-    setResult(state, action) {
+    setResult(state, action: PayloadAction<string | null>) {
       state.result = action.payload;
     }
   }

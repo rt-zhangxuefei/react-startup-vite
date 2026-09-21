@@ -1,22 +1,25 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import styles from './Box.module.less';
+import type { RootState } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { getResult } from '@/store/sagas/box';
 
 const selectResult = createSelector(
-  (state) => state.box,
+  (state: RootState) => state.box,
   (box) => box.result
 );
 
 const Box = () => {
-  const dispatch = useDispatch();
-  const result = useSelector(selectResult);
+  const dispatch = useAppDispatch();
+  const result = useAppSelector(selectResult);
+
   useEffect(() => {
     dispatch(getResult());
-  }, []);
-  return <div className={styles.Box}>{result || 'loading...'}</div>;
+  }, [dispatch]);
+
+  return <div className={styles.box}>{result || 'loading...'}</div>;
 };
 
 export default Box;

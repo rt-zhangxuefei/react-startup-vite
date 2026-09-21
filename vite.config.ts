@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src')
+        '@': path.resolve(import.meta.dirname, './src')
       }
     },
     css: {
@@ -20,7 +20,12 @@ export default defineConfig(({ mode }) => {
         less: {
           javascriptEnabled: true,
           modifyVars: {},
-          additionalData: `@import "@/assets/css/var.less";`
+          additionalData(content: string, filename: string) {
+            if (filename.replace(/\\/g, '/').endsWith('/assets/css/var.less')) {
+              return content;
+            }
+            return `@import "@/assets/css/var.less";\n${content}`;
+          }
         }
       },
       modules: {
@@ -29,7 +34,13 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 3002,
-      open: false // 是否自动打开浏览器
+      open: false, // 是否自动打开浏览器
+      // proxy: {
+      //   '/api': {
+      //     target: 'http://localhost:8080',
+      //     changeOrigin: true
+      //   }
+      // }
     },
     build: {
       outDir,

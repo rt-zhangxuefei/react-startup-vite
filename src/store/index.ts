@@ -5,6 +5,7 @@ import rootSaga from './sagas';
 import reducer from './slices';
 
 const sagaMiddleware = createSagaMiddleware();
+
 export const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
@@ -12,3 +13,6 @@ export const store = configureStore({
 });
 
 sagaMiddleware.run(rootSaga);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

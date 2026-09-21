@@ -1,4 +1,10 @@
-import { createBrowserRouter, createHashRouter, Outlet, RouterProvider } from 'react-router';
+import {
+  createBrowserRouter,
+  createHashRouter,
+  Navigate,
+  Outlet,
+  RouterProvider
+} from 'react-router';
 
 import '@/assets/css/index.less';
 
@@ -15,8 +21,12 @@ const router = createRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        index: true,
+        element: <Navigate to="box" replace />
+      },
+      {
         path: 'box',
-        element: <Box></Box>
+        element: <Box />
       }
     ]
   }
